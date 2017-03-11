@@ -13,18 +13,31 @@ import {
     Alert
 } from 'react-native';
 
-import NavigationBar from 'react-native-navbar';
 
-import {FormLabel, FormInput, Button} from 'react-native-elements';
-
+import {Button} from 'react-native-elements';
 
 
-import HomeScene from '../home/homeScene';
+import InputItem from '../custom/inputItem';
+
+import GlobalMap from "../../utils/global-map";
+
+import MainScene from '../main/mainScene';
 
 const styles = {
     container: {
         flex: 1,
+        backgroundColor: GlobalMap.gloableBackgroundColor,
+        flexDirection: "row"
     },
+    loginFrom: {
+        flex: 1,
+        flexDirection: "column",
+        alignItems: "center"
+    },
+    inputContainerStyle:{
+      width:250,
+    },
+    loginIcon: {}
 };
 
 
@@ -38,22 +51,39 @@ export default class LoginScene extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {loginName: "", loginPassWord: ""};
+        this.state = {loginName: "", loginPassWord: "", rememberFlag: true};
     }
 
-    _getLoginName(val){
-        this.setState({loginName,val});
+    _getLoginName(val) {
+        this.setState({loginName:val});
 
     };
+
+
+    _getPassword(val) {
+        this.setState({loginPassWord:val});
+
+    };
+
     _onPress() {
-        alert(this.state.loginName+":"+this.state.loginPassWord+" 登录成功！");
-        const { navigator } = this.props;
-        if(navigator) {
-            navigator.push({
-                name: 'Home Scene',
-                component: HomeScene,
-            })
+        //alert(this.state.loginName + ":" + this.state.loginPassWord + " 登录成功！");
+        const {navigator} = this.props;
+        if (navigator) {
+
+
+            this.props.navigator.push({
+                name: 'Main Scene',
+                component: MainScene,
+                params:{
+                    selectedTab:"warning"
+                }
+            });
         }
+    };
+
+    _changeRemenberFlag(){
+
+        this.setState({rememberFlag:!this.state.rememberFlag})
     };
 
     render() {
@@ -64,19 +94,19 @@ export default class LoginScene extends Component {
         };
         return (
             <View style={styles.container}>
-                <NavigationBar tintColor="#2b96f4"
-                               title={titleConfig}
-                               leftButton={leftButtonConfig}
-                />
-                <View>
-                    <FormLabel labelStyle={{fontSize:20}}>用户名</FormLabel>
-                    <FormInput  onChangeText={(text) => this.setState({loginName: text})}
-                               inputStyle={{fontSize:18,height:42}} placeholder='用户名'/>
-                    <FormLabel labelStyle={{fontSize:20}}>密码</FormLabel>
-                    <FormInput  onChangeText={(text) => this.setState({loginPassWord: text})} inputStyle={{fontSize:18,height:42}} placeholder='密码'
-                               secureTextEntry={true}/>
+
+                <View style={styles.loginFrom}>
+                    <View style={{marginBottom:50,marginTop:80}}>
+                        <Image style={styles.loginIcon} source={GlobalMap.loginIcon}></Image>
+                    </View>
+
+                    <InputItem value={this.state.loginName} onChangeText={this._getLoginName.bind(this)}  containerStyle={styles.inputContainerStyle} iconName="cf-c02" iconType="mcm" placeholder="请输入用户名"></InputItem>
+                    <InputItem  containerStyle={styles.inputContainerStyle} iconName="mima" iconType="mcm" placeholder="请输入密码"
+                                onChangeText={this._getPassword.bind(this)} value={this.state.loginPassWord}  secureTextEntry={true}></InputItem>
                     <Button
-                        title='登录' backgroundColor="#377bf6" onPress={this._onPress.bind(this)}/>
+                        title='登录' buttonStyle={{width:250,marginTop:40,padding:8,borderRadius:5}} fontSize={18}
+                        backgroundColor="#377bf6" onPress={this._onPress.bind(this)}/>
+
                 </View>
 
             </View>

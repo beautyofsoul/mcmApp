@@ -14,6 +14,8 @@ import {
 
 import NavigationBar from 'react-native-navbar';
 
+import {SearchBar} from 'react-native-elements';
+import ScrollableTabView, {DefaultTabBar,} from 'react-native-scrollable-tab-view';
 
 import TerminalList from '../terminal/terminalList';
 
@@ -29,13 +31,13 @@ const styles = {
 
 
 const titleConfig = {
-    title: '巡检',
+    title: '更换',
     tintColor: "#ffffff",
     style:GlobalMap.navTxtStyle
 };
 
 
-export default  class CheckScene extends Component {
+export default  class ChangeScene extends Component {
     constructor(props) {
         super(props);
         this.state = {

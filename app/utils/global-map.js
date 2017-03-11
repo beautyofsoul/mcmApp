@@ -4,6 +4,11 @@
 'use strict'
 
 export  default {
+    gloableBackgroundColor:"#0344a0",
     loginBackgroundImg:require('../../assets/img/tianhui_bg.jpg'),
-    logoImg:require('../../assets/img/tianhui_login_logo.png')
+    loginIcon:require('../../assets/img/logo.png'),
+    logoImg:require('../../assets/img/tianhui_login_logo.png'),
+    navTxtStyle:{
+        fontSize:20
+    }
 }

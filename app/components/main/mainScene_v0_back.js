@@ -12,21 +12,18 @@ import {
     Alert
 } from 'react-native';
 
+import NavigationBar from 'react-native-navbar';
 
-import { Tabs, Tab } from 'react-native-elements';
-
-import Icon from '../custom/iconItem';
+import { Tabs, Tab, Icon } from 'react-native-elements';
 
 import WarningScene from '../warning/warningScence';
 
 
-import InstallScene from '../install/installScene';
+import InstallScene from '../install/back1';
 
 import  CheckScene from '../check/checkScene';
 
-import  PersonScene from '../person/personScene';
-
-import ChangeScene from '../change/changeScene';
+import  HelpScene from '../help/helpScene';
 
 import GlobalMap from "../../utils/global-map"
 
@@ -127,10 +124,10 @@ export default class MainScene extends Component {
                         selectedTitleStyle={[styles.selectedTitleStyle]}
                         selected={selectedTab === 'warning'}
                         title={'报警'}
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='baojing'
-                                type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='baojing'
-                                type='mcm' size={30} />}
+                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='md-notifications'
+                                type='ionicon' size={30} />}
+                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='md-notifications'
+                                type='ionicon' size={30} />}
                         onPress={() => this.changeTab('warning')}>
                         <WarningScene  navigator={ this.props.navigator} />
                     </Tab>
@@ -140,26 +137,12 @@ export default class MainScene extends Component {
                         selectedTitleStyle={[styles.selectedTitleStyle]}
                         selected={selectedTab === 'install'}
                         title={'安装'}
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='anzhuangfangshi'
-                                type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='anzhuangfangshi'
-                                type='mcm' size={30} />}
+                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='md-hammer'
+                                type='ionicon' size={30} />}
+                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='md-hammer'
+                                type='ionicon' size={30} />}
                         onPress={() => this.changeTab('install')}>
                         <InstallScene navigator={ this.props.navigator}/>
-                    </Tab>
-                    <Tab
-                        tabStyle={styles.tabStyle}
-                        titleStyle={[styles.titleStyle]}
-                        selectedTitleStyle={[styles.selectedTitleStyle]}
-                        selected={selectedTab === 'change'}
-                        title={'更换'}
-
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='genghuan'
-                                type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='genghuan'
-                                type='mcm' size={30} />}
-                        onPress={() => this.changeTab('change')}>
-                        <ChangeScene navigator={ this.props.navigator}/>
                     </Tab>
                     <Tab
                         tabStyle={styles.tabStyle}
@@ -168,10 +151,10 @@ export default class MainScene extends Component {
                         selected={selectedTab === 'check'}
                         title={'巡检'}
 
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='shebeixunjian'
-                                type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='shebeixunjian'
-                                type='mcm' size={30} />}
+                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='md-checkmark-circle'
+                                type='ionicon' size={30} />}
+                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='md-checkmark-circle'
+                                type='ionicon' size={30} />}
                         onPress={() => this.changeTab('check')}>
                         <CheckScene navigator={ this.props.navigator}/>
                     </Tab>
@@ -180,14 +163,14 @@ export default class MainScene extends Component {
                         tabStyle={styles.tabStyle}
                         titleStyle={[styles.titleStyle]}
                         selectedTitleStyle={[styles.selectedTitleStyle]}
-                        selected={selectedTab === 'person'}
-                        title={'我'}
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='wode'
-                                type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='wode'
-                                type='mcm' size={30} />}
-                        onPress={() => this.changeTab('person')}>
-                        <PersonScene navigator={ this.props.navigator} />
+                        selected={selectedTab === 'help'}
+                        title={'帮助'}
+                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='md-help'
+                                type='ionicon' size={30} />}
+                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='md-help'
+                                type='ionicon' size={30} />}
+                        onPress={() => this.changeTab('help')}>
+                        <HelpScene navigator={ this.props.navigator} />
                     </Tab>
 
                 </Tabs>

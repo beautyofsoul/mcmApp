@@ -29,13 +29,13 @@ const styles = {
 
 
 const titleConfig = {
-    title: '巡检',
+    title: '我的',
     tintColor: "#ffffff",
     style:GlobalMap.navTxtStyle
 };
 
 
-export default  class CheckScene extends Component {
+export default  class PersonScene extends Component {
     constructor(props) {
         super(props);
         this.state = {

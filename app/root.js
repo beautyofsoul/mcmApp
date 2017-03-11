@@ -6,7 +6,7 @@
 
 import React, {Component} from 'react';
 import {
-    Navigator
+    Navigator,View,StatusBar
 } from 'react-native';
 
 
@@ -24,18 +24,18 @@ export default class Root extends Component {
             }
         };
         return (
-            <Navigator
-                initialRoute={{ name: "Init Scene", component: InitScene,index: 0 }}
-                configureScene={(route) => {
+                <Navigator
+                    initialRoute={{ name: "Init Scene", component: InitScene,index: 0 }}
+                    configureScene={(route) => {
                 return NoBackSwipe;
                  }}
-                renderScene={(route, navigator) => {
+                    renderScene={(route, navigator) => {
                     let Component = route.component;
                     return <Component {...route.params}  navigator={navigator} />
                 }
 
         }
-            />
+                />
         );
     };
 }

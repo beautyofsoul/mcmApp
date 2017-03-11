@@ -1,11 +1,16 @@
 package com.mcmapp;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.baidu.navisdk.adapter.BNOuterLogUtil;
@@ -36,11 +41,11 @@ public class MainActivity extends ReactActivity {
             int type = msg.what;
             switch (type) {
                 case BaiduNaviManager.TTSPlayMsgType.PLAY_START_MSG: {
-                    showToastMsg("Handler : TTS play start");
+                    //showToastMsg("Handler : TTS play start");
                     break;
                 }
                 case BaiduNaviManager.TTSPlayMsgType.PLAY_END_MSG: {
-                    showToastMsg("Handler : TTS play end");
+                    //showToastMsg("Handler : TTS play end");
                     break;
                 }
                 default :
@@ -58,12 +63,12 @@ public class MainActivity extends ReactActivity {
 
         @Override
         public void playEnd() {
-            showToastMsg("TTSPlayStateListener : TTS play end");
+            //showToastMsg("TTSPlayStateListener : TTS play end");
         }
 
         @Override
         public void playStart() {
-            showToastMsg("TTSPlayStateListener : TTS play start");
+            //showToastMsg("TTSPlayStateListener : TTS play start");
         }
     };
 
@@ -81,6 +86,8 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         activityList.add(this);
         BNOuterLogUtil.setLogSwitcher(true);
@@ -144,22 +151,22 @@ public class MainActivity extends ReactActivity {
 
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, authinfo, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MainActivity.this, authinfo, Toast.LENGTH_LONG).show();
                     }
                 });
             }
 
             public void initSuccess() {
-                Toast.makeText(MainActivity.this, "百度导航引擎初始化成功", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "百度导航引擎初始化成功", Toast.LENGTH_SHORT).show();
                 initSetting();
             }
 
             public void initStart() {
-                Toast.makeText(MainActivity.this, "百度导航引擎初始化开始", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "百度导航引擎初始化开始", Toast.LENGTH_SHORT).show();
             }
 
             public void initFailed() {
-                Toast.makeText(MainActivity.this, "百度导航引擎初始化失败", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "百度导航引擎初始化失败", Toast.LENGTH_SHORT).show();
             }
 
 

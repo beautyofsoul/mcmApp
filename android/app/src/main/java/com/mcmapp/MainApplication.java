@@ -2,14 +2,16 @@ package com.mcmapp;
 
 import android.app.Application;
 
+import com.eguma.barcodescanner.BarcodeScannerPackage;
 import com.facebook.react.ReactApplication;
-import com.mcmapp.baidumap.BaiduNaviPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.eguma.barcodescanner.BarcodeScanner;
+import com.mcmapp.baidumap.BaiduNaviPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
+
 import org.lovebing.reactnative.baidumap.BaiduMapPackage;
 
 import java.util.Arrays;
@@ -28,9 +30,10 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new VectorIconsPackage(),
-             new BarcodeScanner(),
              new BaiduMapPackage(getApplicationContext()),
-             new BaiduNaviPackage()
+             new BaiduNaviPackage(),
+              new BarcodeScannerPackage(),
+              new RCTCameraPackage()
       );
     }
   };

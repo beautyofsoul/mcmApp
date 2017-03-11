@@ -23,30 +23,37 @@ import {
 import NavigationBar from 'react-native-navbar';
 import Dimensions from 'Dimensions';
 
+import GlobalMap from '../../utils/global-map';
+
 import BaiduNaviModule from '../native/baiduNaviModule';
 
 class Buttton extends Component {
     static propTypes = {
         label: PropTypes.string,
+        disabled: PropTypes.string,
         onPress: PropTypes.func
     };
 
     static defaultProps = {
         label: 'Buttton',
+        disabled: "false",
         onPress() {
 
         }
     };
+
     render() {
         return (
             <TouchableHighlight
                 style={styles.btn}
-                onPress={this.props.onPress}>
-                <Text style={{color: 'white'}}>{this.props.label}</Text>
+                onPress={this.props.onPress}
+                disabled={"true"==this.props.disabled?true:false}>
+                <Text style={{color: '#000000'}}>{this.props.label}</Text>
             </TouchableHighlight>
         );
     }
-};
+}
+;
 
 const titleConfig = {
     title: '地图详情',
@@ -59,6 +66,7 @@ export default class BaiduMap extends Component {
         super(props);
 
         this.state = {
+            navFlag: "false",
             mayType: MapTypes.NORMAL,
             zoom: 15,
             center: {
@@ -70,7 +78,7 @@ export default class BaiduMap extends Component {
             markers: [{
                 longitude: props.longitude,
                 latitude: props.latitude,
-                title: "Window of the world"
+                title: props.address
             }]
         };
     }
@@ -86,7 +94,7 @@ export default class BaiduMap extends Component {
         };
         return (
             <View style={styles.container}>
-                <NavigationBar tintColor="#2b96f4"
+                <NavigationBar tintColor={GlobalMap.gloableBackgroundColor}
                                title={titleConfig}
                                leftButton={leftButtonConfig}
                 />
@@ -99,93 +107,33 @@ export default class BaiduMap extends Component {
                     marker={this.state.marker}
                     markers={this.state.markers}
                     style={styles.map}
-                    onMapClick={(data) => {
-                        this.setState({
-                  zoom: 15,
-                  marker: {
-                    latitude: data.latitude,
-                    longitude: data.longitude,
-                    title: 'Your location'
-                  },
-                  center: {
-                    latitude: data.latitude,
-                    longitude: data.longitude
-                  }
-                });
-                        Geolocation.reverseGeoCode(data.latitude,data.longitude).then((returnData) => {
-                            for(var key in returnData)
-                             {
-                                  alert(key+"---->"+returnData[key]);
-                             }
-                        });
-          }}
+
                 >
                 </MapView>
-
-                <View style={styles.row}>
-                    <Buttton label="Normal" onPress={() => {
-            this.setState({
-              mapType: MapTypes.NORMAL
-            });
-          }} />
-                    <Buttton label="Show" onPress={() => {
-               BaiduNaviModule.show("OK",0);
-          }} />
-
-                    <Buttton label="Locate" onPress={() => {
-            Geolocation.getCurrentPosition()
-              .then(data => {
-                this.setState({
-                  zoom: 15,
-                  marker: {
-                    latitude: data.latitude,
-                    longitude: data.longitude,
-                    title: 'Your location'
-                  },
-                  center: {
-                    latitude: data.latitude,
-                    longitude: data.longitude
-                  }
-                });
-              })
-              .catch(e =>{
+                <View style={styles.navStyle}>
+                    <Buttton disabled={this.state.navFlag} label="开始导航" onPress={() => {
+                        try
+                        {
+                            this.setState({navFlag:"true"});
+                             Geolocation.getCurrentPosition()
+            .then(data => {
+                console.log(data);
+                BaiduNaviModule.show(data.longitude,data.latitude,data.address,this.props.longitude,this.props.latitude,this.props.address);
+                this.setState({navFlag:"false"});
+            })
+            .catch(e =>{
                 console.warn(e, 'error');
-              })
-          }} />
+            })
+
+                        }
+                        catch(e)
+                        {
+                           this.setState({navFlag:"false"});
+                        }
+
+
+          }}/>
                 </View>
-
-                <View style={styles.row}>
-                    <Buttton label="Zoom+" onPress={() => {
-            this.setState({
-              zoom: this.state.zoom + 1
-            });
-          }} />
-                    <Buttton label="Zoom-" onPress={() => {
-            if(this.state.zoom > 0) {
-              this.setState({
-                zoom: this.state.zoom - 1
-              });
-            }
-
-          }} />
-                </View>
-
-                <View style={styles.row}>
-                    <Buttton label="Traffic" onPress={() => {
-            this.setState({
-              trafficEnabled: !this.state.trafficEnabled
-            });
-          }} />
-
-                    <Buttton label="Baidu HeatMap" onPress={() => {
-            this.setState({
-              baiduHeatMapEnabled: !this.state.baiduHeatMapEnabled
-            });
-          }} />
-
-
-                </View>
-
 
             </View>
         );
@@ -198,7 +146,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     btn: {
-        height: 24,
+        height: 50,
         borderRadius: 4,
         alignItems: 'center',
         justifyContent: 'center',
@@ -213,7 +161,14 @@ const styles = StyleSheet.create({
     },
     map: {
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height - 200,
+        height: Dimensions.get('window').height - 70,
         marginBottom: 16
+    },
+    navStyle: {
+        position: "absolute",
+        bottom: 10,
+        width: 200,
+        left: Dimensions.get('window').width / 2 - 100
+
     }
 });

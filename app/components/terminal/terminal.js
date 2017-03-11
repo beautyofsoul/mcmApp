@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import {AppRegistry, ListView, Text, View, StyleSheet} from 'react-native';
-import {Icon} from 'react-native-elements';
+import Icon from '../custom/iconItem';
 import BaiduMap from '../baidumap/BaiduMap'
 
 export default class Termial extends Component {
@@ -39,15 +39,15 @@ export default class Termial extends Component {
                     <Icon
                         size={15}
                         iconStyle={styles.iconStyle}
-                        name='location'
-                        type='entypo'
-                        color='#517fa4'
+                        name='icon-yxj-location'
+                        type='mcm'
+                        color='#ffffff'
                         onPress={this._doLocation.bind(this)}
                     /><Text style={styles.actionText}>去处理</Text><Icon
-                    size={15}
-                    name='chevron-right'
-                    type='entypo'
-                    color='#517fa4'
+                    size={17}
+                    name='youjiantou'
+                    type='mcm'
+                    color='#ffffff'
                 />
                 </View>
             </View>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "column",
         borderWidth: 1,
-        borderColor: "#808080",
+        borderColor: "#4b7fc1",
         marginLeft: 5,
         marginRight: 5,
         borderRadius: 5,
@@ -67,21 +67,23 @@ const styles = StyleSheet.create({
 
     },
     txtTitle: {
-        fontSize: 15
+        fontSize: 15,
+        color:"#ffffff"
     },
     txtContent: {
-        fontSize: 15
+        fontSize: 15,
+        color:"#ffffff"
     },
     infoContainer: {
         flexDirection: "row",
 
-        height: 30,
+        height: 35,
         alignItems:"center",
         paddingLeft:10
     },
     bottomLine: {
         borderBottomWidth: 1,
-        borderBottomColor: "#808080"
+        borderBottomColor: "#4b7fc1"
 
     },
     iconStyle:{
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
     },
     actionText:{
         fontSize: 16,
-        color:"#517fa4",
+        color:"#ffffff",
         fontWeight:"600"
 
     }

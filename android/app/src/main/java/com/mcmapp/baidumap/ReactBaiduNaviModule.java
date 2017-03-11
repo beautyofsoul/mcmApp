@@ -54,9 +54,9 @@ public class ReactBaiduNaviModule extends ReactContextBaseJavaModule {
 
 
     @ReactMethod
-    public void show(String message, int duration) {
+    public void show(double beginLng, double beginLat,String beginName,double endLng, double endLat,String endName) {
         if (BaiduNaviManager.isNaviInited()) {
-            routeplanToNavi(BNRoutePlanNode.CoordinateType.BD09LL);
+            routeplanToNavi(beginLng,beginLat,beginName,endLng,endLat,endName,BNRoutePlanNode.CoordinateType.BD09LL);
         }
 
     }
@@ -67,33 +67,12 @@ public class ReactBaiduNaviModule extends ReactContextBaseJavaModule {
 
 
 
-    private void routeplanToNavi(BNRoutePlanNode.CoordinateType coType) {
+    private void routeplanToNavi(double beginLng, double beginLat,String beginName,double endLng, double endLat,String endName,BNRoutePlanNode.CoordinateType coType) {
         BNRoutePlanNode sNode = null;
         BNRoutePlanNode eNode = null;
-        switch (coType) {
-            case GCJ02: {
-                sNode = new BNRoutePlanNode(116.30142, 40.05087, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(113.981718, 22.542449, "yz", null, coType);
-                break;
-            }
-            case WGS84: {
-                sNode = new BNRoutePlanNode(116.300821, 40.050969, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(113.981718, 22.542449, "yz", null, coType);
-                break;
-            }
-            case BD09_MC: {
-                sNode = new BNRoutePlanNode(12947471, 4846474, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(113.981718, 22.542449, "yz", null, coType);
-                break;
-            }
-            case BD09LL: {
-                sNode = new BNRoutePlanNode(116.30784537597782, 40.057009624099436, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(113.981718, 22.542449, "yz", null, coType);
-                break;
-            }
-            default:
-                ;
-        }
+        sNode = new BNRoutePlanNode(beginLng, beginLat, beginName, null, coType);
+        eNode = new BNRoutePlanNode(endLng, endLat, endName, null, coType);
+
         if (sNode != null && eNode != null) {
             List<BNRoutePlanNode> list = new ArrayList<BNRoutePlanNode>();
             list.add(sNode);

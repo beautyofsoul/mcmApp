@@ -10,7 +10,10 @@ import {
     View,
     Image,
     TouchableHighlight,
-    Navigator
+    Navigator,
+    StatusBar,
+    Platform,
+    BackAndroid
 } from 'react-native';
 
 import GlobalMap from '../../utils/global-map';
@@ -25,6 +28,29 @@ export default class InitScene extends Component {
         this.state = {};
     }
 
+    componentWillMount() {
+        if (Platform.OS === 'android') {
+            BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+        }
+    }
+    componentWillUnmount() {
+        if (Platform.OS === 'android') {
+            BackAndroid.removeEventListener('hardwareBackPress', this.onBackAndroid);
+        }
+    }
+
+    onBackAndroid = () => {
+        const { navigator } = this.props;
+        const routers = navigator.getCurrentRoutes();
+        console.log('当前路由长度：'+routers.length);
+        if (routers.length > 1) {
+            navigator.pop();
+            return true;//接管默认行为
+        }
+        return false;//默认行为
+
+    };
+
     _pressButton() {
         const { navigator } = this.props;
         if(navigator) {
@@ -38,24 +64,11 @@ export default class InitScene extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image style={styles.backImg} source={GlobalMap.loginBackgroundImg} resizeMode='cover'>
-                    <View style={styles.overlay}>
-                        <View style={styles.logoImg}>
-                            <Image style={styles.logo} source={GlobalMap.logoImg}></Image>
-                        </View>
-                        <View style={styles.logoTitleView}>
-                            <Text style={styles.logoTitle}>井盖智能检测APP</Text>
-                        </View>
-                        <View style={styles.loginBtnView}>
-                            <TouchableHighlight style={styles.loginBtn} onPress={this._pressButton.bind(this)}>
-                                <View style={styles.button}>
-                                    <Text style={styles.loginTxt}>登录</Text>
-                                </View>
-                            </TouchableHighlight>
-
-                        </View>
-                    </View>
-                </Image>
+                <StatusBar
+                    backgroundColor={GlobalMap.gloableBackgroundColor}
+                    barStyle="light-content"
+                />
+                <LoginScene navigator={this.props.navigator}/>
             </View>
         );
     };
@@ -66,55 +79,5 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center"
     },
-    backImg: {
-        flex: 1,
-        flexDirection: 'column',
-
-    },
-    overlay: {
-        flex: 1,
-        flexDirection: "column",
-        opacity: 1,
-        alignItems: 'center',
-        paddingTop: 80
-
-    },
-    logoImg: {
-        flex: 2,
-        paddingLeft: 60,
-    },
-    logoTitleView: {
-        flex: 1
-    },
-    logoTitle: {
-        fontSize: 25,
-        color: "#ffffff",
-        fontWeight: "700"
-    },
-    logo: {
-        width: 180,
-        height: 180,
-
-    },
-    loginBtnView: {
-        flex: 3,
-        flexDirection: "column",
-        alignItems:"center",
-    },
-    loginBtn:{
-        borderRadius:20
-    },
-    button:{
-        width: 140,
-        height:40,
-        backgroundColor:"#0000EE",
-        justifyContent:"center",
-        alignItems:"center",
-        borderRadius:20
-    },
-    loginTxt:{
-        fontSize: 22,
-        color:"#FFFFFF"
-    }
 
 });
