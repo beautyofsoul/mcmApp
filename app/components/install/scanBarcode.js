@@ -2,68 +2,90 @@
  * Created by qiaoyang on 3/11/17.
  */
 
-import React, { Component } from 'react';
+'use strict';
+import React, {Component} from 'react';
 import {
     AppRegistry,
+    Dimensions,
     StyleSheet,
     Text,
-    Vibration,
+    TouchableHighlight,
     View
 } from 'react-native';
-import BarcodeScanner from 'react-native-barcodescanner';
+import Camera from 'react-native-camera';
 
-export default  class ScanBarcode extends Component {
-    constructor(props) {
+import GlobalMap from '../../utils/global-map';
+
+import NavigationBar from 'react-native-navbar';
+const titleConfig = {
+    title: '条码扫描',
+    tintColor: "#ffffff"
+};
+
+export  default  class BadInstagramCloneApp extends Component {
+    constructor(props)
+    {
         super(props);
-
-        this.state = {
-            barcode: '',
-            cameraType: 'back',
-            text: 'Scan Barcode',
-            torchMode: 'off',
-            type: '',
-        };
     }
 
-    barcodeReceived(e) {
-        if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate();
-
-        this.setState({
-            barcode: e.data,
-            text: `${e.data} (${e.type})`,
-            type: e.type,
-        });
+    _onBarCodeRead(e)
+    {
+        this.props.onBarCodeRead(e);
+        this.props.navigator.pop();
     }
 
     render() {
-        return (
-            <View style={styles.container}>
-                <BarcodeScanner
-                    onBarCodeRead={this.barcodeReceived.bind(this)}
-                    style={{ flex: 1 }}
-                    torchMode={this.state.torchMode}
-                    cameraType={this.state.cameraType}
-                    showViewFinder={false}
-                />
-                <View style={styles.statusBar}>
-                    <Text style={styles.statusBarText}>{this.state.text}</Text>
-                </View>
+        let scanArea = (
+            <View style={styles.rectangleContainer}>
+                <View style={styles.rectangle}/>
             </View>
         );
+
+        const leftButtonConfig = {
+            title: 'Back',
+            handler: () => this.props.navigator.pop(),
+            tintColor: "#ffffff"
+        };
+        return (
+            <View style={{flex:1,flexDirection:"column"}}>
+                <NavigationBar tintColor={GlobalMap.globalStatusBarBackColor}
+                               title={titleConfig}
+                               leftButton={leftButtonConfig}
+                />
+                <Camera
+                    onBarCodeRead={this._onBarCodeRead.bind(this)}
+                    barcodeScannerEnabled={true}
+                    style={styles.camera}>
+                    {scanArea}
+                </Camera>
+            </View>
+
+        );
+    }
+
+    takePicture() {
+        this.camera.capture()
+            .then((data) => console.log(data))
+            .catch(err => console.error(err));
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    camera: {
+        flex: 1
     },
-    statusBar: {
-        height: 100,
+    rectangleContainer: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: 'transparent'
     },
-    statusBarText: {
-        fontSize: 20,
-    },
-});
+    rectangle: {
+        height: 250,
+        width: 250,
+        borderWidth: 2,
+        borderColor: '#00FF00',
+        backgroundColor: 'transparent'
+    }
+})
 

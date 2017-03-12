@@ -65,7 +65,7 @@ export default class InitScene extends Component {
         return (
             <View style={styles.container}>
                 <StatusBar
-                    backgroundColor={GlobalMap.gloableBackgroundColor}
+                    backgroundColor={GlobalMap.globalStatusBarBackColor}
                     barStyle="light-content"
                 />
                 <LoginScene navigator={this.props.navigator}/>

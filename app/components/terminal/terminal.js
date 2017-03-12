@@ -5,7 +5,8 @@
 import React, {Component} from 'react';
 import {AppRegistry, ListView, Text, View, StyleSheet} from 'react-native';
 import Icon from '../custom/iconItem';
-import BaiduMap from '../baidumap/BaiduMap'
+import BaiduMap from '../baidumap/BaiduMap';
+import GlobalMap from '../../utils/global-map';
 
 export default class Termial extends Component {
     constructor(props) {
@@ -41,13 +42,13 @@ export default class Termial extends Component {
                         iconStyle={styles.iconStyle}
                         name='icon-yxj-location'
                         type='mcm'
-                        color='#ffffff'
+                        color={GlobalMap.activeColor}
                         onPress={this._doLocation.bind(this)}
                     /><Text style={styles.actionText}>去处理</Text><Icon
                     size={17}
                     name='youjiantou'
                     type='mcm'
-                    color='#ffffff'
+                    color={GlobalMap.activeColor}
                 />
                 </View>
             </View>
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "column",
         borderWidth: 1,
-        borderColor: "#4b7fc1",
+        borderColor: GlobalMap.defaultLineColor,
         marginLeft: 5,
         marginRight: 5,
         borderRadius: 5,
@@ -68,11 +69,11 @@ const styles = StyleSheet.create({
     },
     txtTitle: {
         fontSize: 15,
-        color:"#ffffff"
+        color:GlobalMap.defaultTextColor
     },
     txtContent: {
         fontSize: 15,
-        color:"#ffffff"
+        color:GlobalMap.defaultTextColor
     },
     infoContainer: {
         flexDirection: "row",
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     },
     bottomLine: {
         borderBottomWidth: 1,
-        borderBottomColor: "#4b7fc1"
+        borderBottomColor: GlobalMap.defaultLineColor
 
     },
     iconStyle:{
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     },
     actionText:{
         fontSize: 16,
-        color:"#ffffff",
+        color:GlobalMap.activeColor,
         fontWeight:"600"
 
     }

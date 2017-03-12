@@ -10,7 +10,8 @@ import {
     Text,
     View,
     Image,
-    Alert
+    Alert,
+    StatusBar
 } from 'react-native';
 
 
@@ -35,7 +36,8 @@ const styles = {
         alignItems: "center"
     },
     inputContainerStyle:{
-      width:250,
+      width:280,
+
     },
     loginIcon: {}
 };
@@ -51,7 +53,12 @@ export default class LoginScene extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {loginName: "", loginPassWord: "", rememberFlag: true};
+        this.state = {loginName: "",
+            loginPassWord: "",
+            rememberFlag: true,
+            statusBarBKColor:GlobalMap.writeBackground,
+            statusBarContentStyle:"dark-content"
+        };
     }
 
     _getLoginName(val) {
@@ -69,8 +76,10 @@ export default class LoginScene extends Component {
         //alert(this.state.loginName + ":" + this.state.loginPassWord + " 登录成功！");
         const {navigator} = this.props;
         if (navigator) {
-
-
+            this.setState({
+                statusBarBKColor:GlobalMap.globalStatusBarBackColor,
+                statusBarContentStyle:"dark-content"
+            });
             this.props.navigator.push({
                 name: 'Main Scene',
                 component: MainScene,
@@ -99,12 +108,13 @@ export default class LoginScene extends Component {
                     <View style={{marginBottom:50,marginTop:80}}>
                         <Image style={styles.loginIcon} source={GlobalMap.loginIcon}></Image>
                     </View>
-
-                    <InputItem value={this.state.loginName} onChangeText={this._getLoginName.bind(this)}  containerStyle={styles.inputContainerStyle} iconName="cf-c02" iconType="mcm" placeholder="请输入用户名"></InputItem>
-                    <InputItem  containerStyle={styles.inputContainerStyle} iconName="mima" iconType="mcm" placeholder="请输入密码"
+                    <View style={{borderWidth:1.5,borderColor:"#e3e3e3",borderRadius:5}}>
+                    <InputItem inputStyle={{color:"#5bd3f5"}}  placeholderTextColor="#e3e3e3" iconColor="#e3e3e3" value={this.state.loginName} onChangeText={this._getLoginName.bind(this)}  containerStyle={styles.inputContainerStyle} iconName="cf-c02" iconType="mcm" placeholder="请输入用户名"></InputItem>
+                    <InputItem inputStyle={{color:"#5bd3f5"}}  placeholderTextColor="#e3e3e3" iconColor="#e3e3e3" containerStyle={styles.inputContainerStyle} iconName="mima" iconType="mcm" placeholder="请输入密码"
                                 onChangeText={this._getPassword.bind(this)} value={this.state.loginPassWord}  secureTextEntry={true}></InputItem>
-                    <Button
-                        title='登录' buttonStyle={{width:250,marginTop:40,padding:8,borderRadius:5}} fontSize={18}
+                    </View>
+                        <Button
+                        title='登录' buttonStyle={{width:280,marginTop:40,padding:8,borderRadius:5}} fontSize={18}
                         backgroundColor="#377bf6" onPress={this._onPress.bind(this)}/>
 
                 </View>

@@ -74,11 +74,12 @@ export default  class WarningScene extends Component {
         };
         return (
             <View style={styles.container}>
-                <NavigationBar tintColor={GlobalMap.gloableBackgroundColor}
+                <NavigationBar tintColor={GlobalMap.globalStatusBarBackColor}
                                title={titleConfig}
                 />
-                <InputItem rightIcon={true} containerStyle={{marginLeft:5,marginRight:5}}
-                           underlineColorAndroid="#5986c0" iconName="sousuo" iconType="mcm"
+                <InputItem iconColor={GlobalMap.activeColor} rightIcon={true} containerStyle={{marginLeft:5,marginRight:5}}
+                           underlineColorAndroid={GlobalMap.defaultLineColor} iconName="sousuo" iconType="mcm"
+                           placeholderTextColor={GlobalMap.activeColor}
                            placeholder="请输入井盖编号/imei号"></InputItem>
                 <TerminalList navigator={this.props.navigator} terminalDatas={this.state.terminalDatas}></TerminalList>
 

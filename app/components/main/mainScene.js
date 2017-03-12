@@ -9,7 +9,8 @@ import {
     Text,
     View,
     Image,
-    Alert
+    Alert,
+    StatusBar
 } from 'react-native';
 
 
@@ -64,10 +65,12 @@ const styles = {
         fontWeight:"600"
     },
     titleStyle:{
-        color:"#ffffff"
+        color:GlobalMap.globalDeActiveColor,
+        fontSize:13
     },
     selectedTitleStyle:{
-        color:"#60fdfb"
+        color:GlobalMap.globalActiveColor,
+        fontSize:13
     }
 };
 
@@ -119,7 +122,6 @@ export default class MainScene extends Component {
         return (
             <View style={styles.container}>
 
-
                 <Tabs tabBarStyle={styles.tabBarStyle}>
                     <Tab
                         tabStyle={styles.tabStyle}
@@ -127,9 +129,9 @@ export default class MainScene extends Component {
                         selectedTitleStyle={[styles.selectedTitleStyle]}
                         selected={selectedTab === 'warning'}
                         title={'报警'}
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='baojing'
+                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={GlobalMap.globalDeActiveColor} name='baojing'
                                 type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='baojing'
+                        renderSelectedIcon={() => <Icon color={GlobalMap.globalActiveColor} name='baojing'
                                 type='mcm' size={30} />}
                         onPress={() => this.changeTab('warning')}>
                         <WarningScene  navigator={ this.props.navigator} />
@@ -140,9 +142,9 @@ export default class MainScene extends Component {
                         selectedTitleStyle={[styles.selectedTitleStyle]}
                         selected={selectedTab === 'install'}
                         title={'安装'}
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='anzhuangfangshi'
+                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={GlobalMap.globalDeActiveColor} name='anzhuangfangshi'
                                 type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='anzhuangfangshi'
+                        renderSelectedIcon={() => <Icon color={GlobalMap.globalActiveColor} name='anzhuangfangshi'
                                 type='mcm' size={30} />}
                         onPress={() => this.changeTab('install')}>
                         <InstallScene navigator={ this.props.navigator}/>
@@ -154,9 +156,9 @@ export default class MainScene extends Component {
                         selected={selectedTab === 'change'}
                         title={'更换'}
 
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='genghuan'
+                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={GlobalMap.globalDeActiveColor} name='genghuan'
                                 type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='genghuan'
+                        renderSelectedIcon={() => <Icon color={GlobalMap.globalActiveColor} name='genghuan'
                                 type='mcm' size={30} />}
                         onPress={() => this.changeTab('change')}>
                         <ChangeScene navigator={ this.props.navigator}/>
@@ -168,9 +170,9 @@ export default class MainScene extends Component {
                         selected={selectedTab === 'check'}
                         title={'巡检'}
 
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='shebeixunjian'
+                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={GlobalMap.globalDeActiveColor} name='shebeixunjian'
                                 type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='shebeixunjian'
+                        renderSelectedIcon={() => <Icon color={GlobalMap.globalActiveColor} name='shebeixunjian'
                                 type='mcm' size={30} />}
                         onPress={() => this.changeTab('check')}>
                         <CheckScene navigator={ this.props.navigator}/>
@@ -182,9 +184,9 @@ export default class MainScene extends Component {
                         selectedTitleStyle={[styles.selectedTitleStyle]}
                         selected={selectedTab === 'person'}
                         title={'我'}
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#ffffff'} name='wode'
+                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={GlobalMap.globalDeActiveColor} name='wode'
                                 type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={'#60fdfb'} name='wode'
+                        renderSelectedIcon={() => <Icon color={GlobalMap.globalActiveColor} name='wode'
                                 type='mcm' size={30} />}
                         onPress={() => this.changeTab('person')}>
                         <PersonScene navigator={ this.props.navigator} />

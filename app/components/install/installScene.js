@@ -16,7 +16,7 @@ import GlobalMap from '../../utils/global-map';
 
 import InputItem from '../custom/inputItem';
 
-import ScanBarcode from './scanBarcode_back1'
+import ScanBarcode from './scanBarcode'
 
 const styles = {
     container: {
@@ -39,11 +39,13 @@ const styles = {
     },
     termType:{
         flexDirection:"row",
-        borderBottomWidth:1,
-        borderBottomColor:"#5986c0"
+        borderBottomWidth:0.5,
+        borderBottomColor:GlobalMap.defaultLineColor
     },
     imeiNoStyle:{
-        flexDirection:"row"
+        flexDirection:"row",
+        borderBottomWidth:0.5,
+        borderBottomColor:GlobalMap.defaultLineColor
     }
 };
 
@@ -103,28 +105,30 @@ export default  class InstallScence extends Component {
         const temTypes = [{value:"1",text:"污水井"},{value:"2",text:"排水井"}];
         return (
             <View style={styles.container}>
-                <NavigationBar tintColor={GlobalMap.gloableBackgroundColor}
+                <NavigationBar tintColor={GlobalMap.globalStatusBarBackColor}
                                title={titleConfig}
                 />
                 <View style={styles.termType}>
-                    <Text style={{paddingTop:13,paddingLeft:6,flex:1,color:"#ffffff",fontSize:16,textAlign:"right"}}>井盖类型:</Text>
+                    <Text style={{paddingTop:13,paddingLeft:6,flex:1,color:GlobalMap.activeColor,fontSize:16,textAlign:"right"}}>井盖类型:</Text>
                     <InputItem rightIcon={true} containerStyle={{marginLeft:5,marginRight:5,flex:4}}
-                               inputStyle={{fontSize:16,color:"#ffffff"}}  placeholderTextColor="#428ff3"
+                               inputStyle={{fontSize:16,color:GlobalMap.defaultInputTextColor}}  placeholderTextColor="#428ff3"
                                selectOnpress={this._onSelectTermType.bind(this)}
                                textValue={this.state.termTypeText}
                                isSelect={true}
+                               iconColor={GlobalMap.activeColor}
                                options={temTypes}
                                underlineColorAndroid="transparent" iconName="xialakuang" iconType="mcm"
                                placeholder="请选择井盖类型"></InputItem>
 
                 </View>
                 <View style={styles.imeiNoStyle}>
-                    <Text style={{paddingTop:13,paddingLeft:6,flex:1,color:"#ffffff",fontSize:16,textAlign:"right"}}>IMEI:</Text>
+                    <Text style={{paddingTop:13,paddingLeft:6,flex:1,color:GlobalMap.activeColor,fontSize:16,textAlign:"right"}}>IMEI:</Text>
                     <InputItem rightIcon={true} containerStyle={{marginLeft:5,marginRight:5,flex:4}}
-                               inputStyle={{fontSize:16,color:"#ffffff"}}  placeholderTextColor="#428ff3"
+                               inputStyle={{fontSize:16,color:GlobalMap.defaultInputTextColor}}  placeholderTextColor="#428ff3"
                                iconOnpress={this._toScan.bind(this)}
                                onChangeText={(text) => {this.setState({imeiNo:text})}}
                                textValue={this.state.imeiNo}
+                               iconColor={GlobalMap.activeColor}
                                underlineColorAndroid="transparent" iconName="saomiaoerweima" iconType="mcm"
                                placeholder="请输入imei号"></InputItem>
                 </View>

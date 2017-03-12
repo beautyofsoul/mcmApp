@@ -94,7 +94,7 @@ export default class BaiduMap extends Component {
         };
         return (
             <View style={styles.container}>
-                <NavigationBar tintColor={GlobalMap.gloableBackgroundColor}
+                <NavigationBar tintColor={GlobalMap.globalStatusBarBackColor}
                                title={titleConfig}
                                leftButton={leftButtonConfig}
                 />
