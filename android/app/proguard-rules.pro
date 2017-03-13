@@ -64,3 +64,13 @@
 -dontwarn java.nio.file.*
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
+
+
+-keep class org.lovebing.*
+-dontwarn org.lovebing.*
+
+-keep class com.baidu.*
+-dontwarn  com.baidu.*
+
+-keep class com.facebook.react.*
+

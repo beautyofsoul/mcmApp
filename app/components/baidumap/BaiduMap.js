@@ -27,6 +27,8 @@ import GlobalMap from '../../utils/global-map';
 
 import BaiduNaviModule from '../native/baiduNaviModule';
 
+import Icon from '../custom/iconItem';
+
 class Buttton extends Component {
     static propTypes = {
         label: PropTypes.string,
@@ -87,11 +89,11 @@ export default class BaiduMap extends Component {
     }
 
     render() {
-        const leftButtonConfig = {
-            title: 'Back',
-            handler: () => this.props.navigator.pop(),
-            tintColor: "#ffffff"
-        };
+        const leftButtonConfig = (<Icon
+            name="arrow-left"
+            type="simple-line-icon"
+            onPress={() => this.props.navigator.pop()}
+            color={"#ffffff"} size={25}/>);
         return (
             <View style={styles.container}>
                 <NavigationBar tintColor={GlobalMap.globalStatusBarBackColor}

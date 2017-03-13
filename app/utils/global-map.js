@@ -11,6 +11,7 @@ export  default {
     globalDeActiveColor:"#7D8790",
     activeColor:"#1e4dac",
     defaultLineColor:"#7D8790",
+    loginDedaultColor:"#CCCCCC",
     deActiveColor:"#7D8790",
     defaultTextColor:"#7D8790",
     defaultInputTextColor:"#0997F7",

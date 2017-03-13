@@ -38,9 +38,10 @@ const styles = {
     },
     tabBarStyle:{
         backgroundColor:GlobalMap.gloableBackgroundColor,
-        borderTopWidth:1,
-        borderTopColor:"#5985c0",
-        height:60
+        borderTopWidth:0.5,
+
+        borderTopColor:GlobalMap.defaultLineColor,
+        height:62
 
     },
     tabStyle:{
@@ -183,10 +184,10 @@ export default class MainScene extends Component {
                         titleStyle={[styles.titleStyle]}
                         selectedTitleStyle={[styles.selectedTitleStyle]}
                         selected={selectedTab === 'person'}
-                        title={'我'}
-                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={GlobalMap.globalDeActiveColor} name='wode'
+                        title={'更多'}
+                        renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={GlobalMap.globalDeActiveColor} name='gengduo'
                                 type='mcm' size={30} />}
-                        renderSelectedIcon={() => <Icon color={GlobalMap.globalActiveColor} name='wode'
+                        renderSelectedIcon={() => <Icon color={GlobalMap.globalActiveColor} name='gengduo'
                                 type='mcm' size={30} />}
                         onPress={() => this.changeTab('person')}>
                         <PersonScene navigator={ this.props.navigator} />

@@ -1,6 +1,7 @@
 /**
- * Created by qiaoyang on 3/11/17.
+ * Created by qiaoyang on 3/7/17.
  */
+
 'use strict'
 
 import React, {Component} from 'react';
@@ -14,6 +15,8 @@ import {
 
 import NavigationBar from 'react-native-navbar';
 
+import {SearchBar} from 'react-native-elements';
+import ScrollableTabView, {DefaultTabBar,} from 'react-native-scrollable-tab-view';
 
 import TerminalList from '../terminal/terminalList';
 
@@ -71,11 +74,12 @@ export default  class CheckScene extends Component {
         };
         return (
             <View style={styles.container}>
-                <NavigationBar tintColor={GlobalMap.gloableBackgroundColor}
+                <NavigationBar tintColor={GlobalMap.globalStatusBarBackColor}
                                title={titleConfig}
                 />
-                <InputItem rightIcon={true} containerStyle={{marginLeft:5,marginRight:5}}
-                           underlineColorAndroid="#5986c0" iconName="md-search" iconType="ionicon"
+                <InputItem iconColor={GlobalMap.activeColor} rightIcon={true} containerStyle={{marginLeft:5,marginRight:5}}
+                           underlineColorAndroid={GlobalMap.defaultLineColor} iconName="sousuo" iconType="mcm"
+                           placeholderTextColor={GlobalMap.activeColor}
                            placeholder="请输入井盖编号/imei号"></InputItem>
                 <TerminalList navigator={this.props.navigator} terminalDatas={this.state.terminalDatas}></TerminalList>
 
