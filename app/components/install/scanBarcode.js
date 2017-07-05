@@ -12,7 +12,8 @@ import {
     TouchableHighlight,
     View
 } from 'react-native';
-import Camera from 'react-native-camera';
+//import Camera from 'react-native-camera';
+import Camera from '../camera/camera';
 
 import GlobalMap from '../../utils/global-map';
 
@@ -53,10 +54,14 @@ export  default  class BadInstagramCloneApp extends Component {
                                leftButton={leftButtonConfig}
                 />
                 <Camera
+                    mirrorImage={true}
                     onBarCodeRead={this._onBarCodeRead.bind(this)}
                     barcodeScannerEnabled={true}
+                    aspect={Camera.constants.Aspect.fill}
+                    showViewFinder={true}
+                    viewFinderBorderWidth={5}
+                    viewFinderShowLoadingIndicator={true}
                     style={styles.camera}>
-                    {scanArea}
                 </Camera>
             </View>
 
@@ -72,7 +77,7 @@ export  default  class BadInstagramCloneApp extends Component {
 
 const styles = StyleSheet.create({
     camera: {
-        flex: 1
+        flex: 1,
     },
     rectangleContainer: {
         flex: 1,

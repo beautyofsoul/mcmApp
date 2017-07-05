@@ -105,8 +105,8 @@ export default class LoginScene extends Component {
         //alert(this.state.loginName + ":" + this.state.loginPassWord + " 登录成功！");
         if(this.state.loginName!="admin"||this.state.loginPassWord!="admin")
         {
-            ToastAndroid.show('用户名或密码错误,登陆失败!', ToastAndroid.SHORT);
-            return;
+            //ToastAndroid.show('用户名或密码错误,登陆失败!', ToastAndroid.SHORT);
+            //return;
         }
 
 
