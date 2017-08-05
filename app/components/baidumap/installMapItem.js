@@ -128,6 +128,7 @@ export default class BaiduMapDemo extends Component {
                 });
                         });
                     } }
+
                     onMapStatusChange={(data) => {
                         this.setState({
                   markers: [{
