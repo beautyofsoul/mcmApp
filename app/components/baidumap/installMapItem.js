@@ -128,6 +128,17 @@ export default class BaiduMapDemo extends Component {
                 });
                         });
                     } }
+                    onMapStatusChange={(data) => {
+                        this.setState({
+                  markers: [{
+                    latitude: data.target.latitude,
+                    longitude: data.target.longitude,
+                    title: ""
+                  }]
+                });
+                    }
+
+                    }
                     onMapDoubleClick={(data) => {
                          console.log(data);
                         Geolocation.reverseGeoCode(data.latitude,data.longitude).then((returnData) => {
